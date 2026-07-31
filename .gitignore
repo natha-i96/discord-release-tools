@@ -1,0 +1,20 @@
+# Discord webhook URLs — NEVER commit
+tools/discord-webhook/webhook.json
+
+# Claude Code local settings — contain tokens/secrets
+.claude/settings.local.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node
+node_modules/
+npm-debug.log*
+*.log
+
+# Env
+.env
+.env.local

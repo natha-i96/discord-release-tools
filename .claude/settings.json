@@ -1,0 +1,8 @@
+{
+  "enabledPlugins": {
+    "notion@claude-plugins-official": true,
+    "sourcegraph@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "discord@claude-plugins-official": true
+  }
+}

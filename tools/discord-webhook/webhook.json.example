@@ -1,0 +1,7 @@
+{
+  "_comment": "Copy to webhook.json and fill in real URLs. webhook.json is gitignored.",
+  "default": "https://discord.com/api/webhooks/000000/REPLACE_ME",
+  "alerts": "https://discord.com/api/webhooks/111111/REPLACE_ME",
+  "deploys": "https://discord.com/api/webhooks/222222/REPLACE_ME",
+  "github": "https://discord.com/api/webhooks/333333/REPLACE_ME"
+}

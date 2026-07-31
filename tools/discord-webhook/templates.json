@@ -1,0 +1,100 @@
+{
+  "simple": {
+    "content": "{{message}}"
+  },
+  "info": {
+    "embeds": [
+      {
+        "title": "{{title}}",
+        "description": "{{description}}",
+        "color": 3447003,
+        "timestamp": "{{isoNow}}",
+        "footer": { "text": "discord-webhook" }
+      }
+    ]
+  },
+  "alert": {
+    "content": "@here **{{severity}}** — {{title}}",
+    "embeds": [
+      {
+        "title": "{{title}}",
+        "description": "{{description}}",
+        "color": "{{color}}",
+        "fields": [
+          { "name": "Service",  "value": "{{service}}",  "inline": true },
+          { "name": "Severity", "value": "{{severity}}", "inline": true },
+          { "name": "Env",      "value": "{{env}}",      "inline": true }
+        ],
+        "timestamp": "{{isoNow}}",
+        "footer": { "text": "alert-bot" }
+      }
+    ]
+  },
+  "deploy": {
+    "username": "Deploy Bot",
+    "avatar_url": "https://cdn.discordapp.com/embed/avatars/0.png",
+    "content": "**{{service}}** deployed to **{{env}}**",
+    "embeds": [
+      {
+        "title": "Deploy {{env}} — {{service}}",
+        "description": "Release `{{version}}` by {{author}}",
+        "color": 3066993,
+        "fields": [
+          { "name": "Service",  "value": "{{service}}",  "inline": true },
+          { "name": "Env",      "value": "{{env}}",      "inline": true },
+          { "name": "Version",  "value": "`{{version}}`", "inline": true },
+          { "name": "Commit",   "value": "`{{sha}}`" },
+          { "name": "Notes",    "value": "{{notes}}" }
+        ],
+        "timestamp": "{{isoNow}}"
+      }
+    ]
+  },
+  "pr": {
+    "username": "GitHub Bot",
+    "content": "🔀 PR **#{{number}}** {{state}}: {{title}}",
+    "embeds": [
+      {
+        "title": "{{title}}",
+        "url": "{{url}}",
+        "color": "{{color}}",
+        "author": { "name": "{{author}}" },
+        "fields": [
+          { "name": "Repo",  "value": "{{repo}}",  "inline": true },
+          { "name": "State", "value": "{{state}}", "inline": true },
+          { "name": "Base",  "value": "`{{base}}` → `{{head}}`" }
+        ],
+        "timestamp": "{{isoNow}}"
+      }
+    ]
+  },
+  "release": {
+    "username": "Release Bot",
+    "avatar_url": "https://cdn.discordapp.com/embed/avatars/2.png",
+    "content": "🚀 **{{service}}** released **{{version}}** to **{{env}}**",
+    "embeds": [
+      {
+        "title": "{{service}} {{version}} — {{env}}",
+        "url": "{{notionUrl}}",
+        "description": "{{summary}}",
+        "color": "{{color}}",
+        "author": { "name": "{{author}}", "icon_url": "{{authorIcon}}" },
+        "fields": [
+          { "name": "Service",   "value": "`{{service}}`",                 "inline": true },
+          { "name": "Env",       "value": "`{{env}}`",                     "inline": true },
+          { "name": "Version",   "value": "`{{version}}`",                 "inline": true },
+          { "name": "Commit",    "value": "`{{sha}}`" },
+          { "name": "Released by", "value": "{{author}}" },
+          { "name": "Highlights", "value": "{{highlights}}" },
+          { "name": "Breaking changes", "value": "{{breaking}}" },
+          {
+            "name": "Links",
+            "value": "[📄 Full notes (Notion)]({{notionUrl}}) • [🏷 Git release]({{releaseUrl}}) • [📝 Commit]({{commitUrl}})"
+          }
+        ],
+        "footer": { "text": "{{service}} release" },
+        "timestamp": "{{isoNow}}"
+      }
+    ]
+  }
+}
