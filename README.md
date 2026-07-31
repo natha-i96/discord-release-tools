@@ -1,5 +1,7 @@
 # Release Tools — Discord Webhook + Notion Summarizer
 
+[![repo](https://img.shields.io/badge/GitHub-natha--i96%2Fdiscord--release--tools-181717?logo=github)](https://github.com/natha-i96/discord-release-tools)
+
 ชุดเครื่องมือส่ง release announcement ไป Discord โดยดึงเนื้อหาจาก Notion (full notes) + GitHub release URL มาสรุปอัตโนมัติ
 
 ประกอบด้วย 3 ส่วน:
@@ -7,6 +9,63 @@
 1. **`tools/discord-webhook/`** — Node.js CLI ส่ง Discord webhook (เลือก template ได้)
 2. **`.claude/skills/discord-release/`** — Skill สำหรับ Claude Code (fetch Notion → summarize → ส่ง)
 3. **`.claude/commands/discord-release.md`** — Slash command `/discord-release`
+
+```bash
+git clone https://github.com/natha-i96/discord-release-tools.git
+cd discord-release-tools
+```
+
+---
+
+## Demo
+
+### Slash command
+
+```
+/discord-release https://www.notion.so/Release-v1-3-0 https://github.com/org/repo/releases/tag/v1.3.0
+```
+
+Claude Code จะ fetch Notion + GitHub release, สรุปเป็น `summary` / `highlights` / `breaking`, render `release` template, แล้วส่งไป webhook
+
+### Output ที่ Discord ได้
+
+```
+🚀 cmcity released v1.3.0-rc to stg
+@Release Bot
+
+┌─────────────────────────────────────────────┐
+│ cmcity v1.3.0-rc — stg                      │
+│ Multi-round inspection review + Checklist   │
+│ JSON Snapshot + prepayment/dates API for    │
+│ audit and history                           │
+│                                             │
+│ Service     Env      Version                │
+│ cmcity      stg      v1.3.0-rc              │
+│                                             │
+│ Released by  natha-i96                      │
+│ Highlights   • Inspection linear lifecycle  │
+│              • Checklist JSON snapshot      │
+│              • Prepayment POST + dates      │
+│ Breaking     none                          │
+│                                             │
+│ 📄 Full notes • 🏷 Git release • 📝 Commit │
+└─────────────────────────────────────────────┘
+```
+
+### CLI dry-run
+
+```bash
+$ node tools/discord-webhook/send.js release \
+    --var service=cmcity --var version=v1.3.0-rc --var env=stg \
+    --var summary="Multi-round inspection review + ..." \
+    --var notionUrl=https://app.notion.com/p/... \
+    --var releaseUrl=https://github.com/.../releases/tag/v1.3.0-rc \
+    --var author=natha-i96 \
+    --var highlights="• Inspection lifecycle\n• Checklist snapshot\n• Prepayment API" \
+    --var breaking=none --var color=ok --webhook deploys --dry
+```
+
+Output: full Discord payload JSON พร้อม embed, fields, links — ตรวจก่อนส่งจริง
 
 ---
 
@@ -24,8 +83,8 @@
 ### 1. Clone repo + ใส่ webhook URL
 
 ```bash
-git clone <this-repo-url>
-cd <repo>
+git clone https://github.com/natha-i96/discord-release-tools.git
+cd discord-release-tools
 
 # copy webhook config + ใส่ URL จริง
 cp tools/discord-webhook/webhook.json.example tools/discord-webhook/webhook.json
@@ -67,8 +126,8 @@ node tools/discord-webhook/send.js simple "hello" --dry
 ### แบบ A — fresh clone
 
 ```bash
-git clone <this-repo-url>
-cd <repo>
+git clone https://github.com/natha-i96/discord-release-tools.git
+cd discord-release-tools
 cp tools/discord-webhook/webhook.json.example tools/discord-webhook/webhook.json
 # ใส่ webhook URL
 ```
